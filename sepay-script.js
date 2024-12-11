@@ -141,11 +141,11 @@
             </div>
             <div>
                     <div style="display: flex; flex-direction: row; gap: 10px;">
-                        <p style="color: black">${Haravan.checkout.billing_address.name}</p>
+                        <p style="color: black">${Haravan.checkout.shipping_address.name}</p>
                         <p style="color: grey;">|</p>
-                        <p style="color: black;">${Haravan.checkout.billing_address.phone}</p>
+                        <p style="color: black;">${Haravan.checkout.shipping_address.phone}</p>
                     </div>
-                    <p style="color: grey;">${Haravan.checkout.billing_address.district}, ${Haravan.checkout.billing_address.province}, ${Haravan.checkout.billing_address.country}</p>
+                    <p style="color: grey;">${Haravan.checkout.shipping_address.district}, ${Haravan.checkout.shipping_address.province}, ${Haravan.checkout.shipping_address.country}</p>
             </div>
         </div>        
         `;
@@ -161,8 +161,11 @@
         `;
 
         const qrContent = $(".main-content .thank-you-additional-content")
-        qrContent.after(orderAddress);
-        qrContent.after(deliveryMethod);
+
+        if (Haravan.checkout.shipping_rate != null) {
+            qrContent.after(orderAddress);
+            qrContent.after(deliveryMethod);
+        }
 
         // Apply new style
         staticStyle()
