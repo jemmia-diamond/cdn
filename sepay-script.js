@@ -134,35 +134,34 @@
 
         $(".main-content .thank-you-checkout-info").remove()
 
-        const orderAddress = `
-        <div class="shipping-info" style="border-radius: 10px !important; padding: 15px; background-color: white; border-radius: 16px !important; margin-bottom: 15px; box-shadow: 0px -1px 2px 0px rgba(0, 0, 0, 0.04), 0px 2px 4px 0px rgba(0, 0, 0, 0.08);">
-            <div style="font-size: 18px; line-height: 20.4px; font-weight: 600; color: black; margin-bottom: 10px;">
-                Địa chỉ nhận hàng
+        if (Haravan.checkout.shipping_rate != null && Haravan.checkout.shipping_address != null) {
+            const orderAddress = `
+            <div class="shipping-info" style="border-radius: 10px !important; padding: 15px; background-color: white; border-radius: 16px !important; margin-bottom: 15px; box-shadow: 0px -1px 2px 0px rgba(0, 0, 0, 0.04), 0px 2px 4px 0px rgba(0, 0, 0, 0.08);">
+                <div style="font-size: 18px; line-height: 20.4px; font-weight: 600; color: black; margin-bottom: 10px;">
+                    Địa chỉ nhận hàng
+                </div>
+                <div>
+                        <div style="display: flex; flex-direction: row; gap: 10px;">
+                            <p style="color: black">${Haravan.checkout.shipping_address.name}</p>
+                            <p style="color: grey;">|</p>
+                            <p style="color: black;">${Haravan.checkout.shipping_address.phone}</p>
+                        </div>
+                        <p style="color: grey;">${Haravan.checkout.shipping_address.district}, ${Haravan.checkout.shipping_address.province}, ${Haravan.checkout.shipping_address.country}</p>
+                </div>
+            </div>        
+            `;
+            const deliveryMethod = `
+            <div class="shipping-method" style="border-radius: 10px !important; padding: 15px; background-color: white; border-radius: 16px !important; margin-bottom: 15px; box-shadow: 0px -1px 2px 0px rgba(0, 0, 0, 0.04), 0px 2px 4px 0px rgba(0, 0, 0, 0.08);">
+                <div style="font-size: 18px; line-height: 20.4px; font-weight: 600; color: black; margin-bottom: 10px;">
+                        <span class="flex-1 text-inherit font-normal px-2 pl-[7px] !font-[500] !text-[#91400D]">Phương thức nhận hàng</span>
+                </div>
+                <div style="color: black;">
+                    ${Haravan.checkout.shipping_rate.title}
+                </div>
             </div>
-            <div>
-                    <div style="display: flex; flex-direction: row; gap: 10px;">
-                        <p style="color: black">${Haravan.checkout.shipping_address.name}</p>
-                        <p style="color: grey;">|</p>
-                        <p style="color: black;">${Haravan.checkout.shipping_address.phone}</p>
-                    </div>
-                    <p style="color: grey;">${Haravan.checkout.shipping_address.district}, ${Haravan.checkout.shipping_address.province}, ${Haravan.checkout.shipping_address.country}</p>
-            </div>
-        </div>        
-        `;
-        const deliveryMethod = `
-        <div class="shipping-method" style="border-radius: 10px !important; padding: 15px; background-color: white; border-radius: 16px !important; margin-bottom: 15px; box-shadow: 0px -1px 2px 0px rgba(0, 0, 0, 0.04), 0px 2px 4px 0px rgba(0, 0, 0, 0.08);">
-            <div style="font-size: 18px; line-height: 20.4px; font-weight: 600; color: black; margin-bottom: 10px;">
-                    <span class="flex-1 text-inherit font-normal px-2 pl-[7px] !font-[500] !text-[#91400D]">Phương thức nhận hàng</span>
-            </div>
-            <div style="color: black;">
-                ${Haravan.checkout.shipping_rate.title}
-            </div>
-        </div>
-        `;
-
-        const qrContent = $(".main-content .thank-you-additional-content")
-
-        if (Haravan.checkout.shipping_rate != null) {
+            `;
+    
+            const qrContent = $(".main-content .thank-you-additional-content")
             qrContent.after(orderAddress);
             qrContent.after(deliveryMethod);
         }
