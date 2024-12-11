@@ -199,7 +199,9 @@
             `background: black;
              padding: 10px 20px !important;
              border-radius: 4px !important; 
-             font-weight: 500;`
+             font-weight: 500 !important;              
+             color: white !important;
+             `
         );
 
         $(".order-summary-toggle-icon-wrapper svg").css("fill", "black");
@@ -225,11 +227,20 @@
         $(".payment-due-price").css("letter-spacing", "0");
         
         if (window.location.href.includes("thank_you")) {
-            $(".sidebar-content").addClass("noafter");
+            if ($(window).width() >= 1000) {
+                $(".sidebar:not(.sidebar-second) .sidebar-content").addClass("noafter");
+            } else {
+                $(".step .step-footer").addClass("nobefore");
+            }
         }
     }
 
     function restyle() {
+        
+        if (window.location.href.includes("thank_you")) {
+            $(".sidebar:not(.sidebar-second) .sidebar-content").addClass("noafter");
+        }
+        
         if ($(window).width() >= 1000) {
             $(".sidebar").attr('style', `  
                 padding-left: 1% !important;
@@ -274,6 +285,7 @@
             // Initialize if order summary is expanded
             if ($(".order-summary").hasClass("order-summary-is-expanded")) {
                 $(".order-summary").attr('style', `
+                        margin-top: 0px !important;
                         margin-bottom: 15px !important;
                         border-radius: 10px !important;
                         padding: 20px !important;
